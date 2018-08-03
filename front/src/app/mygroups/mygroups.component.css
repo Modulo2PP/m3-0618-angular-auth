@@ -1,0 +1,25 @@
+.image{
+    width: 90%;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.orden{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgba(241, 246, 211, 0.8);
+    text-align: center;
+    margin: 10px 15px;
+    border-radius: 10px;
+     
+}

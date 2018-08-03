@@ -1,0 +1,31 @@
+<input type="text" name="" id="buscador" [(ngModel)]='pattern' (ngModelChange)="buscador(pattern)" placeholder="busca perfiles para añadir">
+
+<button (click)="createGroup(groupMembers, groupName)" class="crear">Create Group</button>
+
+<div class="padre">
+    <div  class="resultados">
+    <div *ngFor='let user of data' class="card">
+        <h4>{{user.username}}</h4>
+        <p>{{user.email}}</p>
+        <button (click)="add(user, pattern)"> Add to my Group</button>
+    </div>
+    </div>
+
+
+    <div class="grupoPadre">
+        <input type="text" [(ngModel)]='groupName' >
+        <h2>{{groupName}}</h2>
+        <div *ngFor='let user of groupMembers' class="grupoMember">
+            <div class="imagen">
+                <img src="{{user.profilePic}}" alt="">
+            </div>
+            <div class="info" >
+                <h4>name: {{user.username}}</h4>
+                <p> email: {{user.email}}</p>
+                <p>status: {{user.estatus}}</p>
+                <button (click)='remove(user)'>Remove</button>
+            </div>
+        </div>
+    </div>
+
+</div>

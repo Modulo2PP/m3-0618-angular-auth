@@ -1,0 +1,43 @@
+<div *ngFor='let grupo of group'>
+  <h2>
+    My group: {{grupo.name}}
+  </h2>
+</div>
+
+
+  <div *ngFor='let grupo of group' class="orden" >
+    <ul *ngFor='let members of grupo.members' class="card">
+      <div class="imagePadre">
+          <li class="image"><img src="{{members.profilePic}}" alt=""></li>
+      </div>
+      <div> 
+        <li><h3>Name: {{members.username}}</h3></li>
+        <li><h3>Email: <br>{{members.email}}</h3></li>
+        <li><h3>Status: {{members.estatus}}</h3></li>
+      </div>
+
+    </ul>
+
+  </div>
+
+
+<div class="derecha">
+  <h2>Create a New Favor</h2>
+  <input type="text" placeholder="Description" [(ngModel)]='description'>
+  <input type="number" placeholder="Cost" [(ngModel)]='cost'>
+  <button (click)='createFav( description, cost)'>Create</button>
+
+  <button (click)='bruno()'>see info</button>
+</div>
+
+<div>
+  <h2>Make a Favor</h2>
+  <select name="" *ngFor='let favor of favors'>
+    <option value="{{favor.name}}">{{favor.name}}</option>
+  </select>
+  <h5>cost: {{selectFavor.cost}}</h5>
+</div>
+
+
+
+

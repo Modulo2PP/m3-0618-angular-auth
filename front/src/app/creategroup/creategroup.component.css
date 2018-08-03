@@ -1,0 +1,91 @@
+#buscador{
+    height: 40px;
+    width: 350px;
+    margin-left: 50px;
+}
+
+
+.crear{
+    height: 50px;
+    background-color: rgba(206, 6, 8, 0.8);
+    color: black;
+    border-radius: 10px;    
+    margin-left: 30%
+}
+.padre{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+}
+.resultados{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 60vw;
+}
+
+.grupoPadre{
+    width: 40vw
+}
+
+.card{
+    background-color: rgba(241, 246, 211, 0.8);
+    width: 200px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 15px 15px
+}
+
+.card > p {
+    display: inline-block;
+
+}
+
+.card > h4 {
+    margin: 7px auto 0;
+}
+
+.card > button {
+    border-radius: 15%;
+    margin: 7px auto;
+    width: 80px;
+}
+
+.create{
+    background-color: blue;
+    color: white;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+
+.grupoMember{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    width: 80%;
+    background-color: rgba(241, 246, 211, 0.8);
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+.imagen{
+    width: 25%;
+    margin: auto 0;
+}
+
+.imagen > img{
+    max-width: 100%;
+}
+
+.info > button {
+    margin: 10px 0;
+}

@@ -1,0 +1,38 @@
+.navbar{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(25, 21, 35, 0.5);
+    margin-bottom: 25px;
+}
+
+.navbarUl{
+display: flex;
+flex-direction: row;
+justify-content: left;
+margin: 0;
+list-style: none;
+}
+
+.navbarUl > li {    
+
+margin-right: 50px;
+
+
+
+}
+
+.navbarUl > li > a {
+    color: white;
+}
+
+.logo{
+    font-weight: 800;
+    
+}
+
+.logo > a {
+    color: brown;
+    
+}

@@ -44,8 +44,8 @@ export class SessionService {
     return e;
   }
 
-  signup(username:string, password:string): Observable<object>{
-    return this.http.post(`${BASEURL}/api/auth/signup`,{username,password},this.options).pipe(
+  signup(username:string, password:string, email: string): Observable<object>{
+    return this.http.post(`${BASEURL}/api/auth/signup`,{username,password,email},this.options).pipe(
       map( (res:Response) => {
         let data = res.json();
         this.user = data.user;
@@ -70,6 +70,19 @@ export class SessionService {
     return this.http.get(`${BASEURL}/api/auth/logout`,this.options).pipe(
       map( (res:Response) => {
         this.user = null;
+      }),
+      catchError( e => of(this.errorHandler(e)))
+    )
+  }
+
+  update(username:string, password:string, email: string, estatus:string, image:string): Observable<object>{
+    
+    console.log(username, password, email, estatus, image)
+    return this.http.put(`${BASEURL}/api/auth/update`,{username, password, email, estatus, image},this.options).pipe(
+      map( (res:Response) => {
+        let data = res.json();
+        this.user = data.user;
+        return this.user;
       }),
       catchError( e => of(this.errorHandler(e)))
     )

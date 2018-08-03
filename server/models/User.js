@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: String,
-  password: String
+  username: {type:String, required: true, unique: true},
+  password: {type:String, required: true},
+  email: String,
+  profilePic: {type: String, default:"http://ishowmy.support/img/user-icon-360x360.jpg"},
+  estatus: {type:String, default: "Disponible"},
+  groups: Array,
+  debt: Array
 }, {
   timestamps: {
     createdAt: 'created_at',

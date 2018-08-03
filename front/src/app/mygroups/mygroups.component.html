@@ -1,0 +1,14 @@
+<div class="orden">
+  <div  *ngFor='let group of mygroups'>
+
+    <a [routerLink]="['/my-group', group._id]">
+      <div class="card">
+
+        <h3>{{group.name}}</h3>
+        <img class="image" src="{{group.groupPic}}" alt="foto del grupo">
+
+      </div>
+    </a>
+  </div>
+
+</div>

@@ -9,12 +9,26 @@ import { routes } from './routes';
 import { FormsModule } from '@angular/forms';
 import { SessionService } from '../services/session';
 import { HttpModule } from '@angular/http';
+import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
+import { InicioComponent } from './inicio/inicio.component';
+import { MygroupsComponent } from './mygroups/mygroups.component';
+import { CreategroupComponent } from './creategroup/creategroup.component';
+import { buscadorService } from '../services/buscador.services';
+import { createService } from '../services/create.service';
+import { EachGroupComponent } from './each-group/each-group.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ProfileComponent,
+    HomeComponent,
+    InicioComponent,
+    MygroupsComponent,
+    CreategroupComponent,
+    EachGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +36,7 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     HttpModule
   ],
-  providers: [SessionService],
+  providers: [SessionService, buscadorService, createService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

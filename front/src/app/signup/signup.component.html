@@ -5,7 +5,11 @@
     <br>
     <label> Password </label>
     <input type="password" [(ngModel)]="password" name="password"/>
+   
+    <label> email </label>
+    <input type="email" [(ngModel)]="email" name="email"/>
+    
 
-    <button (click)="signup(username, password)"> SIGNUP </button>
+    <button (click)="signup(username, password, email)"> SIGNUP </button>
   </form>
   <p class="error"> {{ error }} </p>

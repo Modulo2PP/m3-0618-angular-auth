@@ -12,5 +12,3 @@ const extendedCrud = (Model) => {
 
 
 module.exports = extendedCrud;
-
-

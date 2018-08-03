@@ -1,0 +1,50 @@
+.image{
+    width: 70px;
+    height: 70px;
+    margin: auto 0;
+}
+
+.imagePadre{
+    margin: auto 0;
+}
+
+.image > img{
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.orden{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 30%;
+    display: inline-block;
+
+
+}
+.izquierda{
+    width: 33%
+}
+.card{
+    background-color: rgba(241, 246, 211, 0.5);
+    display: inline-block;
+    margin: 10px 0;
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+
+}
+
+.derecha{
+    float: right;
+
+}
+
+.derecha h2{
+    text-align: left;
+}

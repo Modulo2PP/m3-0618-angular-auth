@@ -1,0 +1,33 @@
+<div *ngIf="sessionService.user">
+  <div>
+    <h2>USER INFORMATION</h2>
+    <h3>{{sessionService.user.username}}</h3>
+    <h3>{{sessionService.user.email}}</h3>
+    <h3>{{sessionService.user.estatus}}</h3>
+    <img class="imagen" src="{{sessionService.user.profilePic}}" alt="" >
+  </div>
+</div>
+
+
+<div>
+  <form>
+      <h2> EDIT YOUR PROFILE </h2>
+      <label> Username </label>
+      <input type="text" [(ngModel)]="username" name="username"/>
+
+      <label> Password </label>
+      <input type="password" [(ngModel)]="password" name="password"/>
+     
+      <label> email </label>
+      <input type="email" [(ngModel)]="email" name="email"/>
+      
+      <label> estatus </label>
+      <input type="text" [(ngModel)]="estatus" name="estatus"/>
+      
+      <label> image </label>
+      <input type="text" [(ngModel)]="image" name="image"/>
+      
+
+      <button (click)="update(username, password, email, estatus, image)"> Update Info </button>
+    </form>
+</div>
