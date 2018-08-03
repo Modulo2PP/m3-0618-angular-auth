@@ -2,7 +2,8 @@ const express = require('express');
 const _ = require('lodash');
 const User = require('../models/User');
 const Group = require('../models/group');
-const Favor = require('../models/favors')
+const Favor = require('../models/favors');
+const Debt = require('../models/debt')
 const simpleCrud = (Model, extensionFn) => {
     let router  = express.Router();
 
@@ -55,6 +56,16 @@ const simpleCrud = (Model, extensionFn) => {
             .catch(e => console.log(e))
     })
 
+    router.get('/debt/:id',(req,res,next) => {
+        const id = req.params.id;
+        Debt.findById(id)
+        .populate('deudor')
+        .populate('acreedor')
+            .then( objList => {
+               return  res.status(200).json(objList)
+            })
+            .catch(e => console.log(e))
+    })
     
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
@@ -83,6 +94,18 @@ const simpleCrud = (Model, extensionFn) => {
             
             })
             .catch(e => next(e))
+    })
+
+    router.post('/debt',(req,res,next) => {
+        const object = req.body
+        console.log(object)
+        Debt.create(object)
+    
+            .then( obj => {
+                return res.status(200).json(obj)
+            })
+        
+            .catch(e => console.log(e))
     })
     
         

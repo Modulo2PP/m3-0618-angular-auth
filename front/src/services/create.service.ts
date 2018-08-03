@@ -17,7 +17,8 @@ export class createService {
   groupData;
   newFavor;
   favors;
-  group
+  group;
+  debt
 
   data: any;
 
@@ -43,6 +44,17 @@ export class createService {
         return this.group;
       })
     );
+  }
+
+  createDebt(acreedor, deudor, total){
+    return this.http.post(`${BASEURL}/api/news/debt`,{acreedor,deudor, total},this.options).pipe(
+      map((res: Response) => {
+        let data = res.json();
+        this.debt = data;
+        return this.debt;
+      })
+    );
+
   }
 
 }

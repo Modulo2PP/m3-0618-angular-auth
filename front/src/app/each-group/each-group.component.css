@@ -52,3 +52,37 @@
 .selectfav{
     width: 150px;
 }
+
+.margin{
+    margin: 0 10px 15px;
+}
+
+.margin > input {
+    margin: 0 5px;
+}
+
+.makeFavor{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(241, 246, 211, 0.8);
+    border-radius: 10px;
+    margin: 30px auto;
+}
+
+.makeFavor > h2 {
+    text-align: center;
+}
+
+.makeFavCard{
+display: flex;
+flex-wrap: nowrap;
+justify-content: space-around;
+height: 30px;
+margin-bottom: 15px;
+
+}
+
+.makeFavCard > h3 {
+    margin: auto 0
+}
+

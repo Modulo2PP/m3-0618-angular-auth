@@ -21,6 +21,7 @@ export class buscadorService {
   mygroups:any
   groupInfo;
   eachgroup;
+  debts
 
   options:object = {withCredentials:true};
 
@@ -54,6 +55,17 @@ export class buscadorService {
         return this.eachgroup;
       }),
     )
+  }
+
+  buscarDeuda(id){
+    return this.http.get(`${BASEURL}/api/news/debt/${id}`, this.options).pipe(
+      map( (res:Response) => {
+        this.debts = res.json();
+        return this.debts;
+      }),
+      catchError(e => {console.log("algo ha ido mal"); return of(e)})
+    );
+    
   }
 
 }

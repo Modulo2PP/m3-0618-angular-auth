@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { buscadorService } from '../../services/buscador.services';
 import { createService } from '../../services/create.service';
+import { SessionService } from '../../services/session';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class EachGroupComponent implements OnInit {
   selectedFavor:any = {
     cost:0
   }
-  constructor(public route: ActivatedRoute, public buscarS : buscadorService, public createS: createService) {}
+  debtorId;
+
+  constructor(public route: ActivatedRoute, public buscarS : buscadorService, public createS: createService, public sessionS: SessionService) {}
 
   ngOnInit() {
    this.getMyGroup()
@@ -31,7 +34,6 @@ export class EachGroupComponent implements OnInit {
       this.groupId = params.id
       this.buscarS.mygroup(this.groupId).subscribe(e =>{
         this.group = e
-        console.log(this.group["favors"])
       })
     });
 
@@ -41,7 +43,6 @@ export class EachGroupComponent implements OnInit {
  
     this.createS.createFavor(description, cost, this.groupId).subscribe(e =>{
       this.newFavor = e
-      console.log(this.newFavor);
       this.getMyGroup()
     });
 
@@ -54,7 +55,19 @@ export class EachGroupComponent implements OnInit {
 
     this.selectedFavor =  this.favors.filter(i => i["description"] === favor)[0];
 
-    console.log(this.selectedFavor)
 
+  }
+
+
+  makeFavor(debtor){
+
+    this.debtorId = this.group["members"].filter(i => i["username"] === debtor)[0]._id    
+    this.createS.createDebt(this.sessionS.user["_id"], this.debtorId, this.selectedFavor.cost).subscribe(e =>{
+      this.buscarS.buscarDeuda(e["_id"]).subscribe(e =>{
+        console.log(e)
+      })
+    })
+
+  
   }
 }

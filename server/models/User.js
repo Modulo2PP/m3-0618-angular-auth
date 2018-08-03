@@ -7,7 +7,6 @@ const userSchema = new Schema({
   email: String,
   profilePic: {type: String, default:"http://ishowmy.support/img/user-icon-360x360.jpg"},
   estatus: {type:String, default: "Disponible"},
-  groups: Array,
   debt: Array
 }, {
   timestamps: {

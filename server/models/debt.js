@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const debtSchema = new Schema({
-    deudor: String,
-    acreedor: String,
+    deudor: [{ type : Schema.Types.ObjectId, ref: 'User' }],
+    acreedor: [{ type : Schema.Types.ObjectId, ref: 'User' }],
     total: Number
 }, {
   timestamps: {

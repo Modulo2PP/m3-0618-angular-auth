@@ -21,23 +21,31 @@
 
 
 <div class="derecha">
-  <div>
+  <div class="makeFavor">
     <h2>Create a New Favor</h2>
-    <input type="text" placeholder="Description" [(ngModel)]='description'>
-    <input type="number" placeholder="Cost" [(ngModel)]='cost'>
-    <button (click)='createFav( description, cost)'>Create</button>
+    <div class="margin">
+      <input type="text" placeholder="Description" [(ngModel)]='description'>
+      <input type="number" placeholder="Cost" [(ngModel)]='cost'>
+      <button (click)='createFav( description, cost)'>Create</button>
+    </div>
   </div>
 
-  <div>
+  <div class="makeFavor">
     <h2>Make a Favor</h2>
-    
-    <select name=""  [(ngModel)]='value' (ngModelChange)="selectFavor(value)">
-      <option *ngFor='let favor of group.favors' value="{{favor.description}}" class="selectFav" >
-        {{favor.description}}
-      </option>
-    </select>
-    <h3 *ngIf='selectedFavor'>cost: {{selectedFavor.cost}} </h3>
-    <button>Make It</button>
+    <div class="makeFavCard">
+      <select name=""  [(ngModel)]='value' (ngModelChange)="selectFavor(value)">
+        <option *ngFor='let favor of group.favors' value="{{favor.description}}" class="selectFav" >
+          {{favor.description}}
+        </option>
+      </select>
+      <h3 *ngIf='selectedFavor'>cost: {{selectedFavor.cost}} </h3>
+
+      <h3>To:</h3>
+      <select name="debtor" id="" [(ngModel)]='debtor'>
+        <option *ngFor='let member of group.members'>{{member.username}}</option>
+      </select>
+      <button (click)='makeFavor(debtor)'>Make It</button>
+   </div>
   </div>  
 
 </div>
