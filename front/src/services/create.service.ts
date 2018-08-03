@@ -15,7 +15,9 @@ interface UserObject {
 @Injectable()
 export class createService {
   groupData;
-  favor
+  newFavor;
+  favors;
+  group
 
   data: any;
 
@@ -24,7 +26,6 @@ export class createService {
   constructor(private http: Http) {}
 
   createGroup(members:Array<string>, name:string) {
-    console.log('hihi')
     return this.http.post(`${BASEURL}/api/news/group`,{members,name},this.options).pipe(
         map((res: Response) => {
           let data = res.json();
@@ -34,13 +35,14 @@ export class createService {
       );
   }
 
-  createFavor(description, cost){
-    return this.http.post(`${BASEURL}/api/news/favor`,{description,cost},this.options).pipe(
+  createFavor(description, cost, groupId){
+    return this.http.post(`${BASEURL}/api/news/favor`,{description,cost, groupId},this.options).pipe(
       map((res: Response) => {
         let data = res.json();
-        this.favor = data;
-        return this.favor;
+        this.group = data;
+        return this.group;
       })
     );
   }
+
 }

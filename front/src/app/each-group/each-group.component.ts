@@ -12,36 +12,49 @@ import { createService } from '../../services/create.service';
 export class EachGroupComponent implements OnInit {
 
   groupId;
-  group:Array<any>;
+  group:object;
   favors: Array<object> = []
   newFavor;
-  selectedFavor;
+  selectedFavor:any = {
+    cost:0
+  }
   constructor(public route: ActivatedRoute, public buscarS : buscadorService, public createS: createService) {}
 
   ngOnInit() {
-   
-    this.route.params.subscribe((params) => this.groupId = params.id);
-    this.buscarS.mygroup(this.groupId).subscribe(e =>{
-      this.group = e
-    })
-
+   this.getMyGroup()
+ 
   }
 
-  bruno(){
-    console.log(this.favors)
-  }
 
+  getMyGroup(){
+    this.route.params.subscribe((params) => {
+      this.groupId = params.id
+      this.buscarS.mygroup(this.groupId).subscribe(e =>{
+        this.group = e
+        console.log(this.group["favors"])
+      })
+    });
+
+  }
 
   createFav(description, cost){
  
-  this.createS.createFavor(description, cost).subscribe(e =>{
-    this.newFavor = e
-    console.log(this.newFavor);
-    this.favors.push(this.newFavor)
+    this.createS.createFavor(description, cost, this.groupId).subscribe(e =>{
+      this.newFavor = e
+      console.log(this.newFavor);
+      this.getMyGroup()
     });
+
+
   };
 
   selectFavor(favor){
-    this.selectedFavor = favor
+
+    this.favors = this.group["favors"]
+
+    this.selectedFavor =  this.favors.filter(i => i["description"] === favor)[0];
+
+    console.log(this.selectedFavor)
+
   }
 }

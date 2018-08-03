@@ -34,11 +34,9 @@ const simpleCrud = (Model, extensionFn) => {
     })
 
     router.get('/mygroups/:id',(req,res,next) => {
-        console.log(req.params.id)
         var id = req.params.id
         Group.find({ members: { $in : [id]}})
             .then( objList => {
-                console.log(objList)
                return  res.status(200).json(objList)
                
             })
@@ -48,14 +46,13 @@ const simpleCrud = (Model, extensionFn) => {
 
     router.get('/mygroup/:id',(req,res,next) => {
         const id = req.params.id;
-        console.log(id)
-        Group.find({_id : id})
+        Group.findById(id)
+        .populate('favors')
         .populate('members')
             .then( objList => {
-                console.log(objList)
                return  res.status(200).json(objList)
             })
-            .catch(e => next(e))
+            .catch(e => console.log(e))
     })
 
     
@@ -76,9 +73,15 @@ const simpleCrud = (Model, extensionFn) => {
 
     router.post('/favor',(req,res,next) => {
         const object = req.body
-        console.log(object)
         Favor.create(object)
-            .then( obj => res.status(200).json(obj))
+            .then( obj => {
+                Group.findOneAndUpdate({'_id':object.groupId, $push:{favors:obj._id}} )
+                .then(group =>{
+
+                return res.status(200).json(group)
+                })
+            
+            })
             .catch(e => next(e))
     })
     
@@ -95,6 +98,19 @@ const simpleCrud = (Model, extensionFn) => {
             })
             .catch(e => next(e))
     })
+
+    router.patch('/:id',(req,res,next) => {
+        const id = req.params.id;
+        const object = _.pickBy(req.body, (e,k) => paths.includes(k));
+        const updates = _.pickBy(object, _.identity);
+        Group.findByIdAndUpdate(id, updates ,{new:true})
+            .then( obj => {
+                res.status(200).json({status:'updated',obj});
+            })
+            .catch(e => next(e))
+    })
+
+
     
     // CRUD: DELETE
     router.delete('/:id',(req,res,next) => {
