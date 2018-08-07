@@ -14,36 +14,44 @@ export class EachGroupComponent implements OnInit {
 
   groupId;
   group:object;
+  groupPopulated
   favors: Array<object> = []
   newFavor;
   selectedFavor:any = {
     cost:0
   }
   debtorId;
+  haberes;
+  deudas;
+  groupMembers = []
 
   constructor(public route: ActivatedRoute, public buscarS : buscadorService, public createS: createService, public sessionS: SessionService) {}
 
   ngOnInit() {
-   this.getMyGroup()
+    this.getMyGroup()
+    
+  //  this.balanceHaberes()
  
   }
 
 
   getMyGroup(){
+
     this.route.params.subscribe((params) => {
       this.groupId = params.id
       this.buscarS.mygroup(this.groupId).subscribe(e =>{
         this.group = e
+        this.balanceDeudas()
+        this.balanceHaberes()
       })
     });
-
   }
 
   createFav(description, cost){
- 
+    
     this.createS.createFavor(description, cost, this.groupId).subscribe(e =>{
-      this.newFavor = e
       this.getMyGroup()
+      this.newFavor = e
     });
 
 
@@ -60,14 +68,66 @@ export class EachGroupComponent implements OnInit {
 
 
   makeFavor(debtor){
-
     this.debtorId = this.group["members"].filter(i => i["username"] === debtor)[0]._id    
-    this.createS.createDebt(this.sessionS.user["_id"], this.debtorId, this.selectedFavor.cost).subscribe(e =>{
-      this.buscarS.buscarDeuda(e["_id"]).subscribe(e =>{
-        console.log(e)
+    this.createS.createDebt(this.sessionS.user["_id"], this.debtorId, this.selectedFavor.cost, this.groupId).subscribe(e =>{
+        this.balanceHaberes()
       })
+   
+  }
+
+  info(){
+    console.log(this.groupId)
+  }
+
+  balanceHaberes(){
+    this.buscarS.buscarBalanceHaberes(this.groupId, this.sessionS.user["_id"]).subscribe(data =>{
+      this.haberes = data
+      console.log(this.haberes)
     })
 
+
+ 
+    }
   
+  balanceDeudas(){
+    this.buscarS.buscarBalanceDeudas(this.groupId, this.sessionS.user["_id"]).subscribe(data =>{
+
+      console.log(this.deudas)
+      this.deudas = data
+ 
+    })
   }
 }
+
+
+
+
+
+
+
+
+
+      //   const actualMembers = this.group["members"].map(e =>{
+      //   return e.username
+      // })
+      
+
+      //  this.haberes = data.filter(e => {
+      //   if(actualMembers.includes(e.deudor[0].username)){
+      //     return e
+      //   }
+      // }) 
+
+
+           /* const actualMembers = this.group["members"].map(e =>{
+        return e.username
+      })
+
+      this.deudas = data.filter(e => {
+        if(actualMembers.includes(e.acreedor[0].username)){
+          return e
+        }
+      })
+      
+    })
+     */

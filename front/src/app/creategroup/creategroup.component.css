@@ -12,22 +12,22 @@
     border-radius: 10px;    
     margin-left: 30%
 }
-.padre{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
 
-}
 .resultados{
     display: flex;
     justify-content: left;
     flex-wrap: wrap;
     flex-direction: row;
     width: 60vw;
+    position: relative;
 }
 
 .grupoPadre{
-    width: 40vw
+    width: 40vw;
+    float: right;
+    position: absolute;
+    right: 0%;
+    top: 20%;
 }
 
 .card{
@@ -42,7 +42,7 @@
 
 .card > p {
     display: inline-block;
-
+    margin: 0 auto;
 }
 
 .card > h4 {
@@ -88,4 +88,11 @@
 
 .info > button {
     margin: 10px 0;
+}
+
+.imagenBusqueda{
+    width: 75px;
+    max-width: 100%;
+    margin: 0 auto;
+    
 }

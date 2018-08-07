@@ -46,8 +46,8 @@ export class createService {
     );
   }
 
-  createDebt(acreedor, deudor, total){
-    return this.http.post(`${BASEURL}/api/news/debt`,{acreedor,deudor, total},this.options).pipe(
+  createDebt(acreedor, deudor, total, groupId){
+    return this.http.post(`${BASEURL}/api/news/debt`,{acreedor,deudor, total, groupId},this.options).pipe(
       map((res: Response) => {
         let data = res.json();
         this.debt = data;

@@ -21,7 +21,9 @@ export class buscadorService {
   mygroups:any
   groupInfo;
   eachgroup;
-  debts
+  debts;
+  balanceHaberes;
+  balanceDeudas
 
   options:object = {withCredentials:true};
 
@@ -68,4 +70,27 @@ export class buscadorService {
     
   }
 
+  buscarBalanceHaberes(id, idUsuaario){
+    return this.http.get(`${BASEURL}/api/news/balanceHaberes/${id}/${idUsuaario}`, this.options).pipe(
+      map( (res:Response) => {
+        this.balanceHaberes = res.json();
+        return this.balanceHaberes;
+      }),
+      catchError(e => {console.log("algo ha ido mal"); return of(e)})
+    );
+    
+  }
+
+  buscarBalanceDeudas(id, idUsuario){
+
+    return this.http.get(`${BASEURL}/api/news/balanceDeudas/${id}/${idUsuario}`, this.options).pipe(
+      map( (res:Response) => {
+        this.balanceDeudas = res.json();
+        return this.balanceDeudas;
+      }),
+      catchError(e => {console.log("algo ha ido mal"); return of(e)})
+    );
+    
+  }
+  
 }

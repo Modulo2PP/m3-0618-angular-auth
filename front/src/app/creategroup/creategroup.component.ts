@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { buscadorService } from '../../services/buscador.services';
 import { createService } from '../../services/create.service';
 import { SessionService } from '../../services/session';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creategroup',
@@ -14,7 +15,7 @@ export class CreategroupComponent implements OnInit {
   groupMembers:Array<object> = [this.sessionS.user]
   groupMembersIds:Array<string>
 
-  constructor(public buscadorS : buscadorService, public createS : createService, public sessionS: SessionService) { }
+  constructor(public buscadorS : buscadorService, public createS : createService, public sessionS: SessionService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -29,11 +30,15 @@ export class CreategroupComponent implements OnInit {
     if(pattern.length == 0){
       this.data = null
     }
+    
   }
 
-  add(user, pattern){
+  add(user){
+    console.log(user)
     this.groupMembers.push(user);
     this.groupMembersIds.push(user['id'])
+    
+
   }
 
 
@@ -43,7 +48,11 @@ export class CreategroupComponent implements OnInit {
   }
 
   createGroup(groupMembersIds:Array<string>, groupName){
-    this.createS.createGroup(groupMembersIds, groupName).subscribe()
+    this.createS.createGroup(groupMembersIds, groupName).subscribe(group =>{
+      this.router.navigate(['/']);
+
+    })
+
   }
 
 }

@@ -2,8 +2,8 @@
 
 
 <h2>
-    My group: {{group.name}}
-  </h2>
+  {{group.name}} Group
+</h2>
 
 <div class="orden">
     <ul *ngFor='let members of group.members' class="card">
@@ -23,10 +23,10 @@
 <div class="derecha">
   <div class="makeFavor">
     <h2>Create a New Favor</h2>
-    <div class="margin">
+    <div class="createFavor">
       <input type="text" placeholder="Description" [(ngModel)]='description'>
-      <input type="number" placeholder="Cost" [(ngModel)]='cost'>
-      <button (click)='createFav( description, cost)'>Create</button>
+      <input  type="number" placeholder="Cost" [(ngModel)]='cost'>
+      <button class="buttons" (click)='createFav(description,cost)'>Create</button>
     </div>
   </div>
 
@@ -44,17 +44,41 @@
       <select name="debtor" id="" [(ngModel)]='debtor'>
         <option *ngFor='let member of group.members'>{{member.username}}</option>
       </select>
-      <button (click)='makeFavor(debtor)'>Make It</button>
+      <button class="buttons" (click)='makeFavor(debtor)'>Make It</button>
    </div>
   </div>  
+
+</div>
+<div class="balance">
+  <div class="haberes">
+  <h2>HABERES</h2>
+    <div class="haberesCard" *ngFor='let haber of haberes' >
+
+      <h3>
+        Deudor: {{haber.deudor[0].username}} <br>
+        Deuda: {{haber.total}} ptos
+      </h3>
+
+    </div>
+  </div>
+
+  <div class="deudas">
+      <h2>DEUDAS</h2>
+      <div class="deudasCard" *ngFor='let deuda of deudas' >
+    
+        <h3>
+          Acreedor: {{deuda.acreedor[0].username}} <br>
+          Deuda: {{deuda.total}} ptos
+        </h3>
+    
+      </div>
+    </div>
 
 </div>
 
 
 
 
-
-
-
+<button (click)='info()'>VER info</button>
 
 </div>

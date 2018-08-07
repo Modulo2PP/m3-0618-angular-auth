@@ -2,18 +2,18 @@
 
 <button (click)="createGroup(groupMembers, groupName)" class="crear">Create Group</button>
 
-<div class="padre">
     <div  class="resultados">
     <div *ngFor='let user of data' class="card">
         <h4>{{user.username}}</h4>
         <p>{{user.email}}</p>
-        <button (click)="add(user, pattern)"> Add to my Group</button>
+        <img  class="imagenBusqueda" src="{{user.profilePic}}" alt="">
+        <button (click)="add(user)"> Add to my Group</button>
     </div>
     </div>
 
 
     <div class="grupoPadre">
-        <input type="text" [(ngModel)]='groupName' >
+        <input type="text" [(ngModel)]='groupName' style="background-color:transparent">
         <h2>{{groupName}}</h2>
         <div *ngFor='let user of groupMembers' class="grupoMember">
             <div class="imagen">
@@ -27,5 +27,3 @@
             </div>
         </div>
     </div>
-
-</div>

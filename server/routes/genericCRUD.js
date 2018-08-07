@@ -66,6 +66,31 @@ const simpleCrud = (Model, extensionFn) => {
             })
             .catch(e => console.log(e))
     })
+
+    router.get('/balanceHaberes/:id/:idUsuario',(req,res,next) => {
+        const id = req.params.id;
+        const idUsuario = req.params.idUsuario
+        Group.findById(id)
+        .populate({path:'debts', populate: {path: 'deudor'}})
+
+            .then( objList => {
+                var haberes = objList.debts.filter(e => e.acreedor[0] == idUsuario)
+                return  res.status(200).json(haberes)
+            })
+            .catch(e => console.log(e))
+    })
+
+    router.get('/balanceDeudas/:id/:idUsuario',(req,res,next) => {
+        const id = req.params.id;
+        const idUsuario = req.params.idUsuario
+        Group.findById(id)
+        .populate({path:'debts', populate: {path: 'acreedor'}})
+            .then( objList => {
+                var deudas = objList.debts.filter(e => e.deudor[0] == idUsuario)
+               return  res.status(200).json(deudas)
+            })
+            .catch(e => console.log(e))
+    })
     
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
@@ -86,12 +111,10 @@ const simpleCrud = (Model, extensionFn) => {
         const object = req.body
         Favor.create(object)
             .then( obj => {
-                Group.findOneAndUpdate({'_id':object.groupId, $push:{favors:obj._id}} )
+                Group.findByIdAndUpdate(object.groupId, {$push:{favors: obj._id}} )
                 .then(group =>{
-
-                return res.status(200).json(group)
+                    return res.status(200).json(group)
                 })
-            
             })
             .catch(e => next(e))
     })
@@ -100,11 +123,12 @@ const simpleCrud = (Model, extensionFn) => {
         const object = req.body
         console.log(object)
         Debt.create(object)
-    
             .then( obj => {
-                return res.status(200).json(obj)
+                Group.findByIdAndUpdate(object.groupId, {$push:{debts: obj._id}})
+                    .then(group =>{
+                        return res.status(200).json(group)
+                    })
             })
-        
             .catch(e => console.log(e))
     })
     

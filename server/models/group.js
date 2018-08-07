@@ -5,6 +5,7 @@ const groupSchema = new Schema({
     name: String,
     members: [{ type : Schema.Types.ObjectId, ref: 'User' }],
     favors: [{ type : Schema.Types.ObjectId, ref: 'favor' }],
+    debts: [{ type : Schema.Types.ObjectId, ref: 'debt' }],
     groupPic: {type: String, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWam7rBttceZ4DJiWfRg2jrwchZMVuiQx2mXlmYjvFqR4Wf21V6w"}
 }, {
   timestamps: {
@@ -15,5 +16,3 @@ const groupSchema = new Schema({
 
 const group = mongoose.model('group', groupSchema);
 module.exports = group;
-
-

@@ -26,7 +26,7 @@
     width: 33%
 }
 .card{
-    background-color: rgba(241, 246, 211, 0.5);
+    background-color: rgba(241, 246, 211, 0.7);
     display: inline-block;
     margin: 10px 0;
     list-style: none;
@@ -42,7 +42,7 @@
 
 .derecha{
     float: right;
-
+    width: 66%;
 }
 
 .derecha h2{
@@ -53,18 +53,27 @@
     width: 150px;
 }
 
-.margin{
+.createFavor{
     margin: 0 10px 15px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
-.margin > input {
+.createFavor > input {
     margin: 0 5px;
+    width: 33%
 }
 
+.buttons{
+    background-color: rgba(30, 30, 30, 0.6);
+    border-radius: 5px;
+    color: white;
+
+}
 .makeFavor{
     display: flex;
     flex-direction: column;
-    background-color: rgba(241, 246, 211, 0.8);
+    background-color: rgba(241, 246, 211, 0.7);
     border-radius: 10px;
     margin: 30px auto;
 }
@@ -86,3 +95,67 @@ margin-bottom: 15px;
     margin: auto 0
 }
 
+.haberesCard{
+    background-color: rgba(154, 245, 169, 0.8);
+    border-radius: 10px;
+    text-align: center;
+    width: 25%;
+    margin: 15px;
+    height: 100px;
+}
+
+.haberes{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: ce;
+    margin: 10px;
+    background-color: rgba(241, 246, 211, 0.4);
+    border-radius: 10px;
+
+}
+
+.haberes > h2{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+
+.deudas{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 10px;
+    background-color: rgba(241, 246, 211, 0.4);
+    border-radius: 10px;
+}
+
+.deudas > h2{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: black;
+}
+
+.deudasCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: rgba(244, 161, 161, 0.8);
+    border-radius: 10px;
+    text-align: center;
+    width: 33%;
+    margin: 15px;
+    height: 100px;
+}
+
+.balance{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
