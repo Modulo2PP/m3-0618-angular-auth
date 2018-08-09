@@ -2,3 +2,65 @@
     height: 150px;
     width: 150px;
 }
+
+.izquiarriba{
+    text-align: center;
+    width: 30vw;
+    margin-left: 20px;
+    border-right: 1px solid #DEF4C6;
+    padding-right: 20px;
+}
+
+.dereArriba{
+    width: 70vw;
+    text-align: center;
+
+}
+
+.user > h2{
+    border-bottom: 1px solid #DEF4C6;
+    padding-bottom: 15px;
+}
+
+.dereArriba > h2{
+    border-bottom: 1px solid #DEF4C6;
+    padding-bottom: 15px;
+}
+
+.user > h3{
+    margin: 10px;
+}
+
+.imagen{
+    border-radius: 50%;
+}
+
+.formulario{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: rgba(123, 137, 134, 0.5);
+    border-radius: 10px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.formulas{
+    width: 50%;
+    margin:  15px 0; 
+}
+
+.ultimo{
+    width: 100%;
+}
+
+.formulario > button{
+    margin: 10px 0;
+}
+.profileInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}

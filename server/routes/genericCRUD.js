@@ -56,16 +56,6 @@ const simpleCrud = (Model, extensionFn) => {
             .catch(e => console.log(e))
     })
 
-    router.get('/debt/:id',(req,res,next) => {
-        const id = req.params.id;
-        Debt.findById(id)
-        .populate('deudor')
-        .populate('acreedor')
-            .then( objList => {
-               return  res.status(200).json(objList)
-            })
-            .catch(e => console.log(e))
-    })
 
     router.get('/balanceHaberes/:id/:idUsuario',(req,res,next) => {
         const id = req.params.id;
@@ -92,6 +82,48 @@ const simpleCrud = (Model, extensionFn) => {
             .catch(e => console.log(e))
     })
     
+    router.get('/getprofile/:id',(req,res,next) => {
+        const id = req.params.id
+        User.findById(id)
+            .then( user => res.status(200).json(user))
+            .catch(e => next(e))
+    })
+
+/*     router.get('/getgroups/:id',(req,res,next) => {
+        const id = req.params.id
+        Group.find()
+            .then( group => {
+                
+                console.log(retorno)
+                res.status(200).json(retorno)
+            })
+            .catch(e => next(e))
+    }) */
+ 
+    router.get('/getall',(req,res,next) => {
+        User.find({})
+            .then( user => res.status(200).json(user))
+            .catch(e => next(e))
+    })
+
+
+    router.get('/buscarhaberes/:id',(req,res,next) => {
+        const id = req.params.id;
+        const rg = new RegExp(id, 'i')
+        Debts.find({acreedor:rg})
+            .then( objList => {
+                console.log(objList)
+               return  res.status(200).json(objList)
+               
+            })
+
+            .catch(e => next(e))
+    })
+
+    
+    
+
+
     // CRUD: CREATE
     router.post('/',(req,res,next) => {
         const object = _.pickBy(req.body, (e,k) => paths.includes(k));
@@ -121,15 +153,53 @@ const simpleCrud = (Model, extensionFn) => {
 
     router.post('/debt',(req,res,next) => {
         const object = req.body
-        console.log(object)
-        Debt.create(object)
-            .then( obj => {
-                Group.findByIdAndUpdate(object.groupId, {$push:{debts: obj._id}})
-                    .then(group =>{
-                        return res.status(200).json(group)
-                    })
+        
+        Debt.findOneAndUpdate({acreedor: object.acreedor, deudor: object.deudor},{ $inc: { total: object.total } }, {new:true})
+        .then(e =>{
+            if(!e){
+            console.log("esta intentando entrar en el segundo update")
+             Debt.findOneAndUpdate({acreedor: object.deudor, deudor: object.acreedor},{ $inc: { total: -object.total}}, {new:true})
+            .then(() =>{
+                Debt.findOne({acreedor: object.deudor, deudor: object.acreedor})
+                .then(e =>{
+                    console.log("intentanndo entrar antes del primer div")
+                    if(e){
+                        if(e.total < 0){
+                        object.total = Math.abs(e["total"])
+                        Debt.findByIdAndRemove(e._id)
+                        .then(()=>{    
+                            Debt.create(object)
+                            .then(obj =>{ 
+                                Group.findByIdAndUpdate(object.groupId, {$push:{debts: obj._id}}, {new:true})
+                                .then(obj =>{
+                                    return res.status(200).json(obj)
+                                })  
+                            })
+                        })
+                    }else if (e.total == 0){
+                        console.log("entra en borrar la deuda cuando es 0")
+                        Debt.findByIdAndRemove(e._id)
+                    }
+                    }else{
+                        console.log(object, "antes de crear la nueva deuda")
+                        Debt.create(object)
+                        .then(obj =>{
+                            console.log("se esta buscando el grupo al que hay que hacerle el push de la nueva deuda")
+                            Group.findByIdAndUpdate(object.groupId, {$push:{debts:obj._id}}, {new:true})
+                            .then(obj =>{
+                                return res.status(200).json(obj)
+                            })
+                        })
+                    }
+                })
             })
+
+            }else{
+                return res.status(200).json(e)
+            }
+        })
             .catch(e => console.log(e))
+
     })
     
         

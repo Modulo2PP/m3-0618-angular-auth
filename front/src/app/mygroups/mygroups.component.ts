@@ -13,7 +13,7 @@ export class MygroupsComponent implements OnInit {
   allgroups;
   mygroups;
   id = this.sessionService.user["_id"]
-  constructor(public buscadorS : buscadorService, public sessionService: SessionService, private router: Router) { }
+  constructor(public buscadorS : buscadorService, public sessionService: SessionService, public router: Router) { }
 
   ngOnInit() {
   

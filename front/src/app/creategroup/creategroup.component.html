@@ -1,21 +1,31 @@
-<input type="text" name="" id="buscador" [(ngModel)]='pattern' (ngModelChange)="buscador(pattern)" placeholder="busca perfiles para añadir">
 
-<button (click)="createGroup(groupMembers, groupName)" class="crear">Create Group</button>
-
+<div class="ordenMaximo">
+    
     <div  class="resultados">
-    <div *ngFor='let user of data' class="card">
-        <h4>{{user.username}}</h4>
-        <p>{{user.email}}</p>
-        <img  class="imagenBusqueda" src="{{user.profilePic}}" alt="">
-        <button (click)="add(user)"> Add to my Group</button>
-    </div>
+        <input type="text" name="" id="buscador" [(ngModel)]='pattern' (ngModelChange)="buscador(pattern)" placeholder="busca perfiles para añadir">
+        <div *ngFor='let user of data' class="card">
+            <h4>{{user.username}}</h4>
+            <p>{{user.email}}</p>
+            <img  class="imagenBusqueda" src="{{user.profilePic}}" alt="">
+            <button (click)="add(user)"> Add to my Group</button>
+        </div>
     </div>
 
+    <div class="padrePadre">
+     <!-- <button (click)="createGroup(groupMembers, groupName)" class="crear">Create Group</button> -->
 
-    <div class="grupoPadre">
         <input type="text" [(ngModel)]='groupName' style="background-color:transparent">
         <h2>{{groupName}}</h2>
-        <div *ngFor='let user of groupMembers' class="grupoMember">
+        <div class="grupoPadre">
+            <div *ngFor='let user of groupMembers' class="card">
+                    <h4>{{user.username}}</h4>
+                    <p>{{user.email}}</p>
+                    <img  class="imagenBusqueda" src="{{user.profilePic}}" alt="">
+                    <button (click)='remove(user)'>Remove</button>
+
+            </div>
+        </div>
+<!--         <div *ngFor='let user of groupMembers' class="grupoMember">
             <div class="imagen">
                 <img src="{{user.profilePic}}" alt="">
             </div>
@@ -25,5 +35,6 @@
                 <p>status: {{user.estatus}}</p>
                 <button (click)='remove(user)'>Remove</button>
             </div>
-        </div>
+        </div> -->
     </div>
+</div>

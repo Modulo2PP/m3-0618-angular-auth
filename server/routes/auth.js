@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const passport = require('passport');
 const _ = require('lodash')
+const multer = require("multer");
+const uploadCloud = require('../config/cloudinary.js');
 
 const login = (req, user) => {
   return new Promise((resolve, reject) => {
@@ -94,14 +96,10 @@ router.put('/update', (req, res, next) => {
     password,
     email,
     estatus,
-    image
+    _id
   } = req.body)
-  console.log(updates)
 
-
-  User.findOne({
-      username
-    })
+  User.findOne({username})
     .then(foundUser => {
       if (foundUser) throw new Error('Username already exists');
       if (updates.password) {
@@ -112,11 +110,46 @@ router.put('/update', (req, res, next) => {
         updates.password = hashPass
       }
 
-      User.findOneAndUpdate(req.body.username, updates)
-
-        .catch(e => next(e));
+        User.findByIdAndUpdate(updates._id, updates)
+        .then(e =>{
+          return res.status(200).json(e)
+        })
+      
     })
+    .catch(e => next(e));
 });
+
+router.post('/updatepic', uploadCloud.single('file'), (req, res, next) => {
+
+  const updates = _.pickBy({
+    username,
+    password,
+    email,
+    estatus
+  } = req.body)
+
+  if (req.file.url) updates.profilePic = req.file.url;
+  console.log(updates)
+
+  User.findById(req.body._id)
+  .then(foundUser => {
+    //if (foundUser) throw new Error('Username already exists');
+    if (updates.password) {
+
+      const salt = bcrypt.genSaltSync(10);
+      const hashPass = bcrypt.hashSync(updates.password, salt);
+
+      updates.password = hashPass
+
+    }
+      User.findByIdAndUpdate(req.body._id, updates)
+      .then(e =>{
+        return res.status(200).json(e)
+      })
+  })
+  .catch(e => next(e));
+});
+
 
 router.use((err, req, res, next) => {
   res.status(500).json({

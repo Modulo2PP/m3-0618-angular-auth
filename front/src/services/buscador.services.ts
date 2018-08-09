@@ -23,7 +23,11 @@ export class buscadorService {
   eachgroup;
   debts;
   balanceHaberes;
-  balanceDeudas
+  balanceDeudas;
+  getUser;
+  groupsOfUser;
+  getall;
+  totalHaberes
 
   options:object = {withCredentials:true};
 
@@ -74,6 +78,7 @@ export class buscadorService {
     return this.http.get(`${BASEURL}/api/news/balanceHaberes/${id}/${idUsuaario}`, this.options).pipe(
       map( (res:Response) => {
         this.balanceHaberes = res.json();
+        console.log(this.balanceHaberes, "este es el console del servicio")
         return this.balanceHaberes;
       }),
       catchError(e => {console.log("algo ha ido mal"); return of(e)})
@@ -92,5 +97,42 @@ export class buscadorService {
     );
     
   }
+
+  getProfile(id){
+    return this.http.get(`${BASEURL}/api/news/getprofile/${id}`, this.options).pipe(
+      map( (res:Response) => {
+        this.getUser = res.json();
+        return this.getUser;
+      }),
+      catchError(e => {console.log("algo ha ido mal"); return of(e)})
+    );
+  }
   
+  getGroups(id){
+    return this.http.get(`${BASEURL}/api/news/getgroups/${id}`, this.options).pipe(
+      map( (res:Response) => {
+        this.groupsOfUser = res.json();
+        return this.groupsOfUser;
+      }),
+      catchError(e => {console.log("algo ha ido mal"); return of(e)})
+    );
+  }
+
+  getAll(){
+    return this.http.get(`${BASEURL}/api/news/getall/`, this.options).pipe(
+      map( (res:Response) => {
+        this.getall = res.json();
+        return this.getall;
+      }),
+    )
+  }
+
+  buscarHaberes(id){
+    return this.http.get(`${BASEURL}/api/news/buscarhaberes/${id}`, this.options).pipe(
+      map( (res:Response) => {
+        this.totalHaberes = res.json();
+        return this.totalHaberes;
+      }),
+    )
+  }
 }

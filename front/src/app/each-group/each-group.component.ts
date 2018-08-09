@@ -24,7 +24,8 @@ export class EachGroupComponent implements OnInit {
   haberes;
   deudas;
   groupMembers = []
-
+  info:any;
+  
   constructor(public route: ActivatedRoute, public buscarS : buscadorService, public createS: createService, public sessionS: SessionService) {}
 
   ngOnInit() {
@@ -58,31 +59,24 @@ export class EachGroupComponent implements OnInit {
   };
 
   selectFavor(favor){
-
     this.favors = this.group["favors"]
-
     this.selectedFavor =  this.favors.filter(i => i["description"] === favor)[0];
-
-
   }
 
 
   makeFavor(debtor){
     this.debtorId = this.group["members"].filter(i => i["username"] === debtor)[0]._id    
-    this.createS.createDebt(this.sessionS.user["_id"], this.debtorId, this.selectedFavor.cost, this.groupId).subscribe(e =>{
-        this.balanceHaberes()
+    this.createS.createDebt(this.sessionS.user["_id"], this.debtorId, this.selectedFavor.cost, this.groupId).subscribe(()  =>{
+        this.balanceHaberes();
+        this.balanceDeudas();
       })
    
   }
 
-  info(){
-    console.log(this.groupId)
-  }
-
   balanceHaberes(){
     this.buscarS.buscarBalanceHaberes(this.groupId, this.sessionS.user["_id"]).subscribe(data =>{
+      console.log("hola")
       this.haberes = data
-      console.log(this.haberes)
     })
 
 
@@ -91,43 +85,10 @@ export class EachGroupComponent implements OnInit {
   
   balanceDeudas(){
     this.buscarS.buscarBalanceDeudas(this.groupId, this.sessionS.user["_id"]).subscribe(data =>{
-
-      console.log(this.deudas)
+      console.log("esta entrabdo en el balance deudas")
+      console.log(data)
       this.deudas = data
  
     })
   }
 }
-
-
-
-
-
-
-
-
-
-      //   const actualMembers = this.group["members"].map(e =>{
-      //   return e.username
-      // })
-      
-
-      //  this.haberes = data.filter(e => {
-      //   if(actualMembers.includes(e.deudor[0].username)){
-      //     return e
-      //   }
-      // }) 
-
-
-           /* const actualMembers = this.group["members"].map(e =>{
-        return e.username
-      })
-
-      this.deudas = data.filter(e => {
-        if(actualMembers.includes(e.acreedor[0].username)){
-          return e
-        }
-      })
-      
-    })
-     */

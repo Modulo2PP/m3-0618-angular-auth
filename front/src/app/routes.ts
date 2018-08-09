@@ -7,6 +7,8 @@ import { InicioComponent } from './inicio/inicio.component';
 import { MygroupsComponent } from './mygroups/mygroups.component';
 import { CreategroupComponent } from './creategroup/creategroup.component';
 import { EachGroupComponent } from './each-group/each-group.component';
+import { UserinfoComponent } from './userinfo/userinfo.component';
+import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [
   { path:'', component:HomeComponent},
@@ -17,5 +19,7 @@ export const routes: Routes = [
   { path:'my-groups', component: MygroupsComponent},
   { path:'create-groups', component: CreategroupComponent},
   { path:'my-group/:id', component: EachGroupComponent},
+  { path:'userinfo/:id', component: UserinfoComponent},
+  { path:'chat/:id', component: ChatComponent},
 
 ];

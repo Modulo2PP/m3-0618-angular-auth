@@ -1,54 +1,52 @@
 <div *ngIf='group'>
+<div class="parteArriba">
+  <div class="izquiArriba">
+    <h2>
+      {{group.name}} Group
+    </h2>
 
+    <div class="orden">
+        <ul *ngFor='let members of group.members' class="card">
+            <li> <div class="imagenMembersPadre" ><img class="imagenMembers" src="{{members.profilePic}}" alt=""></div></li>
+            <li><h3>Name: {{members.username}}</h3></li>
+            <li><a [routerLink]="['/userinfo', members._id]"><button>View profile</button></a></li>
+            <li><a [routerLink]="['/chat', members._id]"><button>open chat</button></a></li>
 
-<h2>
-  {{group.name}} Group
-</h2>
-
-<div class="orden">
-    <ul *ngFor='let members of group.members' class="card">
-      <div class="imagePadre">
-          <li class="image"><img src="{{members.profilePic}}" alt=""></li>
+        </ul>
       </div>
-      <div> 
-        <li><h3>Name: {{members.username}}</h3></li>
-        <li><h3>Email: <br>{{members.email}}</h3></li>
-        <li><h3>Status: {{members.estatus}}</h3></li>
-      </div>
-
-    </ul>
   </div>
+  <div class="dereArriba">
+      <div class="derecha">
+        <div class="makeFavor">
+          <h2>Create a New Favor</h2>
+          <div class="createFavor">
+            <input type="text" placeholder="Description" [(ngModel)]='description'>
+            <input  type="number" placeholder="Cost" [(ngModel)]='cost'>
+            <button class="buttons" (click)='createFav(description,cost)'>Create</button>
+          </div>
+        </div>
 
+        <div class="makeFavor">
+          <h2>Make a Favor</h2>
+          <div class="makeFavCard">
+            <select name=""  [(ngModel)]='value' (ngModelChange)="selectFavor(value)">
+              <option *ngFor='let favor of group.favors' value="{{favor.description}}" class="selectFav" >
+                {{favor.description}}
+              </option>
+            </select>
+            <h3 *ngIf='selectedFavor'>cost: {{selectedFavor.cost}} </h3>
 
-<div class="derecha">
-  <div class="makeFavor">
-    <h2>Create a New Favor</h2>
-    <div class="createFavor">
-      <input type="text" placeholder="Description" [(ngModel)]='description'>
-      <input  type="number" placeholder="Cost" [(ngModel)]='cost'>
-      <button class="buttons" (click)='createFav(description,cost)'>Create</button>
+            <h3>To:</h3>
+            <select name="debtor" id="" [(ngModel)]='debtor'>
+              <option *ngFor='let member of group.members'>{{member.username}}</option>
+            </select>
+            <button class="buttons" (click)='makeFavor(debtor)'>Make It</button>
+        </div>
+        </div>  
     </div>
   </div>
-
-  <div class="makeFavor">
-    <h2>Make a Favor</h2>
-    <div class="makeFavCard">
-      <select name=""  [(ngModel)]='value' (ngModelChange)="selectFavor(value)">
-        <option *ngFor='let favor of group.favors' value="{{favor.description}}" class="selectFav" >
-          {{favor.description}}
-        </option>
-      </select>
-      <h3 *ngIf='selectedFavor'>cost: {{selectedFavor.cost}} </h3>
-
-      <h3>To:</h3>
-      <select name="debtor" id="" [(ngModel)]='debtor'>
-        <option *ngFor='let member of group.members'>{{member.username}}</option>
-      </select>
-      <button class="buttons" (click)='makeFavor(debtor)'>Make It</button>
-   </div>
-  </div>  
-
 </div>
+
 <div class="balance">
   <div class="haberes">
   <h2>HABERES</h2>
@@ -77,8 +75,7 @@
 </div>
 
 
+</div>
 
 
 <button (click)='info()'>VER info</button>
-
-</div>

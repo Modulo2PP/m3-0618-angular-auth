@@ -1,33 +1,63 @@
-<div *ngIf="sessionService.user">
-  <div>
-    <h2>USER INFORMATION</h2>
-    <h3>{{sessionService.user.username}}</h3>
-    <h3>{{sessionService.user.email}}</h3>
-    <h3>{{sessionService.user.estatus}}</h3>
-    <img class="imagen" src="{{sessionService.user.profilePic}}" alt="" >
+<div class="profileInfo">
+  <div *ngIf="sessionService.user" class="izquiarriba">
+    <div class="user">
+      <h2>USER INFORMATION</h2>
+      <h3>{{sessionService.user.username}}</h3>
+      <h3>{{sessionService.user.email}}</h3>
+      <h3>{{sessionService.user.estatus}}</h3>
+      <img class="imagen" src="{{sessionService.user.profilePic}}" alt="" >
+    </div>
+  </div>
+
+
+  <div class="dereArriba">
+    <h2> EDIT YOUR PROFILE </h2>
+    <form class="formulario">
+        <div class="formulas">
+          <label> Username </label>
+          <input type="text" [(ngModel)]="user.username" name="username" placeholder={{sessionService.user.username}}/>
+       </div>
+
+       <div class="formulas">
+          <label> password </label>
+          <input type="password" [(ngModel)]="user.password" name="password" placeholder="new password"/>
+        </div>
+
+        <div class="formulas">
+          <label> email </label>
+          <input type="email" [(ngModel)]="user.email" name="email" placeholder={{sessionService.user.email}}/>
+        </div>
+
+        <div class="formulas">
+          <label> status </label>
+          <input type="text" [(ngModel)]="user.estatus" name="estatus" placeholder={{sessionService.user.estatus}}/>
+        </div>
+
+        <div class="formulas ultimo">
+          <label> image </label>
+          <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
+        </div>
+
+        <button (click)="update()"> Update Info </button>
+      </form>
   </div>
 </div>
 
 
-<div>
-  <form>
-      <h2> EDIT YOUR PROFILE </h2>
-      <label> Username </label>
-      <input type="text" [(ngModel)]="username" name="username"/>
+<div class="general">
+  <h2>BALANCE TOTAL</h2>
+  <div class="orden">
+    <div class="eachFlex">
+      <h3>HABERES</h3>
+      <div class="haberesCard" >
+        
+      </div>
+    </div>
+    <div>
+      <h3>DEUDAS</h3>
+      <div  class="deudasCard">
 
-      <label> Password </label>
-      <input type="password" [(ngModel)]="password" name="password"/>
-     
-      <label> email </label>
-      <input type="email" [(ngModel)]="email" name="email"/>
-      
-      <label> estatus </label>
-      <input type="text" [(ngModel)]="estatus" name="estatus"/>
-      
-      <label> image </label>
-      <input type="text" [(ngModel)]="image" name="image"/>
-      
-
-      <button (click)="update(username, password, email, estatus, image)"> Update Info </button>
-    </form>
+      </div>
+    </div>
+  </div>
 </div>

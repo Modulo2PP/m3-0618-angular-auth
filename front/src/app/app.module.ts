@@ -17,6 +17,10 @@ import { CreategroupComponent } from './creategroup/creategroup.component';
 import { buscadorService } from '../services/buscador.services';
 import { createService } from '../services/create.service';
 import { EachGroupComponent } from './each-group/each-group.component';
+import { UserinfoComponent } from './userinfo/userinfo.component';
+import { FileUploadModule } from 'ng2-file-upload';
+import { ChatService } from '../services/chat.service';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -28,15 +32,18 @@ import { EachGroupComponent } from './each-group/each-group.component';
     InicioComponent,
     MygroupsComponent,
     CreategroupComponent,
-    EachGroupComponent
+    EachGroupComponent,
+    UserinfoComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    HttpModule
+    HttpModule,
+    FileUploadModule
   ],
-  providers: [SessionService, buscadorService, createService],
+  providers: [SessionService, buscadorService, createService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,15 @@
+.imagen{
+    width: 200px;
+    max-width: 100%;
+    border-radius: 50%;
+    margin-top: 30px;
+}
+
+.orden{
+    text-align: center;
+}
+
+h2{
+    padding-bottom: 40px;
+    border-bottom: 1px solid #DEF4C6;
+}

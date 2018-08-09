@@ -4,20 +4,39 @@
     margin: auto 0;
 }
 
-.imagePadre{
-    margin: auto 0;
+
+.parteArriba{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.image > img{
+.izquiArriba{
+    width: 35vw;
+    margin-left: 35px;
+}
+
+.dereArriba{
+    width: 65vw;
+    margin-top: 50px;
+}
+
+.imagenMembers {
+    margin:  auto;
     max-width: 100%;
     border-radius: 10px;
+    width: 80px;
+}
+
+.imagenMembersPadre{
+    width: 50px;
+    margin-left: 5px;
 }
 
 .orden{
     display: flex;
     flex-direction: column;
     position: relative;
-    width: 30%;
     display: inline-block;
 
 
@@ -25,8 +44,12 @@
 .izquierda{
     width: 33%
 }
+
+.card > li {
+    margin: auto;
+}
 .card{
-    background-color: rgba(241, 246, 211, 0.7);
+    background-color: rgba(123, 137, 134, 0.5);
     display: inline-block;
     margin: 10px 0;
     list-style: none;
@@ -42,11 +65,7 @@
 
 .derecha{
     float: right;
-    width: 66%;
-}
-
-.derecha h2{
-    text-align: left;
+    width: 100%;
 }
 
 .selectfav{
@@ -64,16 +83,11 @@
     width: 33%
 }
 
-.buttons{
-    background-color: rgba(30, 30, 30, 0.6);
-    border-radius: 5px;
-    color: white;
 
-}
 .makeFavor{
     display: flex;
     flex-direction: column;
-    background-color: rgba(241, 246, 211, 0.7);
+    background-color: rgba(123, 137, 134, 0.5);
     border-radius: 10px;
     margin: 30px auto;
 }
@@ -111,7 +125,7 @@ margin-bottom: 15px;
     flex-wrap: wrap;
     justify-content: ce;
     margin: 10px;
-    background-color: rgba(241, 246, 211, 0.4);
+    background-color: rgba(123, 137, 134, 0.5);
     border-radius: 10px;
 
 }
@@ -130,7 +144,7 @@ margin-bottom: 15px;
     flex-wrap: wrap;
     justify-content: flex-start;
     margin: 10px;
-    background-color: rgba(241, 246, 211, 0.4);
+    background-color: rgba(123, 137, 134, 0.5);
     border-radius: 10px;
 }
 

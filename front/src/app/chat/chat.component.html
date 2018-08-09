@@ -1,0 +1,8 @@
+  
+  <ul *ngIf='chatS.messages'>
+      <li *ngFor="let message of chatS.messages">
+        <b>From {{message.origin}}: </b> <span>{{message.content}}</span>
+      </li>
+    </ul>
+    <input [(ngModel)]="chatBox">
+    <button (click)="sendMessage(chatBox); chatBox=''">Send</button>

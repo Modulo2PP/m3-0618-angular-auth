@@ -1,0 +1,20 @@
+
+<div *ngIf='userInfo' class="orden">
+
+
+  <h2>USER INFORMATION</h2>
+
+  <img class="imagen" src="{{userInfo.profilePic}}" alt="">
+  <h3>{{userInfo.username}}</h3>
+  <h4>{{userInfo.estatus}}</h4>
+  <h4>{{userInfo.email}}</h4>
+
+</div>
+
+<!-- <div *ngIf='groups'>
+
+  <div class="card" *ngfor='let group of groups'>
+
+    <h2>{{group.name}}</h2>
+  </div>
+</div> -->

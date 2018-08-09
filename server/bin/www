@@ -1,7 +1,7 @@
 const http = require('http');
-
+const socketIo=require('socket.io');
 let app = require('../app');
-
+let chatserver=require('../chatserver')
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
@@ -20,6 +20,8 @@ app.use((err, req, res, next) => {
 }); // Express middleware to handle errors
 
 let server = http.createServer(app);
+let io = socketIo(server);
+chatserver(io)
 
 server.on('error', error => {
   if (error.syscall !== 'listen') { throw error }

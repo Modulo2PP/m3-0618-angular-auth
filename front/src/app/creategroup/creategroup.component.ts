@@ -13,12 +13,17 @@ export class CreategroupComponent implements OnInit {
 
   data = this.buscadorS.data
   groupMembers:Array<object> = [this.sessionS.user]
-  groupMembersIds:Array<string>
+  groupMembersIds:Array<string> = [];
+  pattern:any;
+  groupName:any;
 
-  constructor(public buscadorS : buscadorService, public createS : createService, public sessionS: SessionService, private router: Router) { }
+  constructor(public buscadorS : buscadorService, public createS : createService, public sessionS: SessionService, public router: Router) { }
 
   ngOnInit() {
-  }
+    
+    this.buscador("")
+    }
+  
 
 
   buscador(pattern){
@@ -27,8 +32,10 @@ export class CreategroupComponent implements OnInit {
         this.data = e
       })
     }
-    if(pattern.length == 0){
-      this.data = null
+    if(pattern == ""){
+      this.buscadorS.getAll().subscribe(e =>{
+        this.data = e
+      })
     }
     
   }

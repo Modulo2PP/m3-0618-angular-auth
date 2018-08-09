@@ -17,7 +17,7 @@ interface UserObject{
 @Injectable()
 export class SessionService {
 
-  user:UserObject;
+  user:any;
 
   options:object = {withCredentials:true};
 
@@ -75,13 +75,15 @@ export class SessionService {
     )
   }
 
-  update(username:string, password:string, email: string, estatus:string, image:string): Observable<object>{
+  update(user): Observable<object>{
     
-    console.log(username, password, email, estatus, image)
-    return this.http.put(`${BASEURL}/api/auth/update`,{username, password, email, estatus, image},this.options).pipe(
+    // console.log(username, email, estatus, userId)
+    return this.http.put(`${BASEURL}/api/auth/update`,user, this.options).pipe(
       map( (res:Response) => {
         let data = res.json();
+        console.log(data)
         this.user = data.user;
+        console.log("esta entrabdo")
         return this.user;
       }),
       catchError( e => of(this.errorHandler(e)))
