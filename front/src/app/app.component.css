@@ -7,7 +7,7 @@
     margin-bottom: 25px;
 }
 
-.navbarUl{
+.divs{
 display: flex;
 flex-direction: row;
 justify-content: left;
@@ -15,18 +15,18 @@ margin: 0;
 list-style: none;
 }
 
-.navbarUl > li {    
+.divs > li {    
 
-margin-right: 50px;
+margin-right: 20px;
 border: 1px solid white;
 border-radius: 10px;
-padding: 5px;
+padding: 0 5px;
+margin: auto 5px;
 }
 
-.navbarUl > li > a {
+.divs > li > a {
     color: white;
     text-decoration: none;
-
 }
 
 .logo{
@@ -35,6 +35,23 @@ padding: 5px;
 }
 
 .logo > a {
-    color: brown;
-    
+    color: brown;   
+}
+
+.orden{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.imagen{
+    margin: auto;
+    width: 40px;
+    border-radius: 10px;
+    margin-left: 15px;
+}
+
+.especial{
+    margin-right: 65px; 
 }

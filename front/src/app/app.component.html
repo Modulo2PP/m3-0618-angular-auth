@@ -1,11 +1,22 @@
 <div class="navbar">
   <ul class="navbarUl">
+    <div *ngIf="!sessionService.user" class="divs">
       <li class="logo" *ngIf="sessionService.user"><a [routerLink]="['/']">FavChain</a></li>
-      <li *ngIf="!sessionService.user"><a [routerLink]="['/signup']">Signup</a></li>
-      <li *ngIf="!sessionService.user"><a [routerLink]="['/login']">Login</a></li>
-      <li *ngIf="sessionService.user"><a [routerLink]="['/']">HOME</a></li>
-      <li *ngIf="sessionService.user"><a [routerLink]="['/profile']">profile</a></li>
-      <li *ngIf="sessionService.user"><a href="#" (click)="logout()">Logut</a></li>
+      <li><a [routerLink]="['/signup']">Signup</a></li>
+      <li><a [routerLink]="['/login']">Login</a></li>
+    </div>
+      <div *ngIf="sessionService.user" class="orden">
+        <div class="divs">
+          <li class="logo" *ngIf="sessionService.user"><a [routerLink]="['/']">FavChain</a></li>
+          <li><a [routerLink]="['/']">HOME</a></li>
+          <li><a [routerLink]="['/profile']">profile</a></li>
+          <li><a href="#" (click)="logout()">Logut</a></li>
+        </div>
+        <div class="divs especial">
+            <li ><a [routerLink]="['/profile']">{{sessionService.user.username}}</a></li>
+            <img class="imagen" src="{{sessionService.user.profilePic}}" alt="">
+        </div>
+      </div>
   </ul>
 </div>
 
