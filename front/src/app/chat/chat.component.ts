@@ -25,7 +25,7 @@ export class ChatComponent implements OnInit {
   sendMessage(message){
 
     const id = this.id
-    const myId = this.sessionS.user["_id"]
-    this.chatS.sendMessageTo(message, id, myId)
+    const me = this.sessionS.user
+    this.chatS.sendMessageTo(message, id, me)
   }
 }

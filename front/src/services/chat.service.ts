@@ -22,7 +22,7 @@ export class ChatService {
    this.socket.on('FreackMessage',(data) => {
      // Actually push the message when arrives
      this.messages.push({
-       origin:'Server',
+       origin:'sercer',
        content:data
      });
    })
@@ -30,9 +30,10 @@ export class ChatService {
 
    this.sessionService.isLogged().subscribe(user =>{
     this.socket.on(`${user._id}`,(data) => {
+      console.log(data)
       this.messages.push({
-        origin:'Server',
-        content:data
+        origin: data.me.username,
+        content:data.message
       });
     })
 
@@ -42,10 +43,10 @@ export class ChatService {
 
  }
 
- sendMessageTo(message, id, myId){
+ sendMessageTo(message, id, me){
   var idbueno = id.id
   console.log(idbueno)
-  this.socket.emit('messageto', {message, idbueno, myId})
+  this.socket.emit('messageto', {message, idbueno, me})
  }
 
  sendMessage(message:string){

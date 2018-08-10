@@ -1,8 +1,11 @@
   
-  <ul *ngIf='chatS.messages'>
-      <li *ngFor="let message of chatS.messages">
-        <b>From {{message.origin}}: </b> <span>{{message.content}}</span>
+  <ul *ngIf='chatS.messages' class="orden">
+      <li *ngFor="let message of chatS.messages" class="mensaje">
+        <b>{{message.origin}}: </b> <span> {{message.content}}</span>
       </li>
-    </ul>
+  </ul>
+
+  <div class="botones">  
     <input [(ngModel)]="chatBox">
     <button (click)="sendMessage(chatBox); chatBox=''">Send</button>
+  </div>

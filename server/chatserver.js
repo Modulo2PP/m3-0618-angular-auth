@@ -14,9 +14,10 @@ const chatServer = (io) => {
         
         socket.on('messageto', data => {
             console.log(data)
+            console.log("-------------------------")
             console.log("siuuuuu");
-            socket.broadcast.emit(data.idbueno, data.message);
-            socket.emit(data.myId, data.message)
+            socket.broadcast.emit(data.idbueno, data);
+            socket.emit(data.me._id, data)
         });
         
     });

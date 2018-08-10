@@ -157,12 +157,10 @@ const simpleCrud = (Model, extensionFn) => {
         Debt.findOneAndUpdate({acreedor: object.acreedor, deudor: object.deudor},{ $inc: { total: object.total } }, {new:true})
         .then(e =>{
             if(!e){
-            console.log("esta intentando entrar en el segundo update")
              Debt.findOneAndUpdate({acreedor: object.deudor, deudor: object.acreedor},{ $inc: { total: -object.total}}, {new:true})
-            .then(() =>{
+            .then((updated) =>{
                 Debt.findOne({acreedor: object.deudor, deudor: object.acreedor})
                 .then(e =>{
-                    console.log("intentanndo entrar antes del primer div")
                     if(e){
                         if(e.total < 0){
                         object.total = Math.abs(e["total"])
@@ -177,14 +175,13 @@ const simpleCrud = (Model, extensionFn) => {
                             })
                         })
                     }else if (e.total == 0){
-                        console.log("entra en borrar la deuda cuando es 0")
                         Debt.findByIdAndRemove(e._id)
+                    }else {
+                        return res.status(200).json(e)
                     }
                     }else{
-                        console.log(object, "antes de crear la nueva deuda")
                         Debt.create(object)
                         .then(obj =>{
-                            console.log("se esta buscando el grupo al que hay que hacerle el push de la nueva deuda")
                             Group.findByIdAndUpdate(object.groupId, {$push:{debts:obj._id}}, {new:true})
                             .then(obj =>{
                                 return res.status(200).json(obj)
@@ -193,7 +190,6 @@ const simpleCrud = (Model, extensionFn) => {
                     }
                 })
             })
-
             }else{
                 return res.status(200).json(e)
             }
@@ -201,8 +197,6 @@ const simpleCrud = (Model, extensionFn) => {
             .catch(e => console.log(e))
 
     })
-    
-        
     
     // CRUD: UPDATE
     router.patch('/:id',(req,res,next) => {

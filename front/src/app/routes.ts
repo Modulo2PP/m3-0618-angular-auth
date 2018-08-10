@@ -11,7 +11,7 @@ import { UserinfoComponent } from './userinfo/userinfo.component';
 import { ChatComponent } from './chat/chat.component';
 
 export const routes: Routes = [
-  { path:'', component:HomeComponent},
+  { path:'', component:InicioComponent},
   { path:'signup', component:SignupComponent},
   { path:'login', component:LoginComponent},
   { path:'profile', component: ProfileComponent},

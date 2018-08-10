@@ -1,0 +1,16 @@
+.orden{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    margin: 100px 0
+}
+
+.card{
+    background-color: rgba(123, 137, 134, 0.5);
+    border-radius: 10px;
+    width: 40%;
+}
+
+button{
+    margin: 20px;
+}

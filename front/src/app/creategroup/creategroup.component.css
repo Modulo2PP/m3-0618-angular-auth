@@ -22,7 +22,10 @@
     background-color: rgba(206, 6, 8, 0.8);
     color: black;
     border-radius: 10px;    
-    margin-left: 30%
+    margin-left: 30%;
+    position: relative;
+    right: 110px;
+    margin-bottom: 15px;
 }
 
 .resultados{

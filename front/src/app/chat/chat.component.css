@@ -1,0 +1,16 @@
+.orden{
+    background-color: rgba(123, 137, 134, 0.5);
+    border-radius: 10px;
+    margin: 0 auto;
+    width: 50%
+}
+
+.botones{
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.orden > li{
+    max-width: 100%;
+}

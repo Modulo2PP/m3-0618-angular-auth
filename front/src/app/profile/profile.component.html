@@ -14,27 +14,27 @@
     <h2> EDIT YOUR PROFILE </h2>
     <form class="formulario">
         <div class="formulas">
-          <label> Username </label>
+          <label> Username: </label>
           <input type="text" [(ngModel)]="user.username" name="username" placeholder={{sessionService.user.username}}/>
        </div>
 
        <div class="formulas">
-          <label> password </label>
-          <input type="password" [(ngModel)]="user.password" name="password" placeholder="new password"/>
+          <label> password: </label>
+          <input type="password" [(ngModel)]="password" name="password" placeholder="new password"/>
         </div>
 
         <div class="formulas">
-          <label> email </label>
+          <label> email: </label>
           <input type="email" [(ngModel)]="user.email" name="email" placeholder={{sessionService.user.email}}/>
         </div>
 
         <div class="formulas">
-          <label> status </label>
+          <label> status: </label>
           <input type="text" [(ngModel)]="user.estatus" name="estatus" placeholder={{sessionService.user.estatus}}/>
         </div>
 
         <div class="formulas ultimo">
-          <label> image </label>
+          <label> image: </label>
           <input type="file" name="file" ng2FileSelect [uploader]="uploader" />
         </div>
 
@@ -43,21 +43,3 @@
   </div>
 </div>
 
-
-<div class="general">
-  <h2>BALANCE TOTAL</h2>
-  <div class="orden">
-    <div class="eachFlex">
-      <h3>HABERES</h3>
-      <div class="haberesCard" >
-        
-      </div>
-    </div>
-    <div>
-      <h3>DEUDAS</h3>
-      <div  class="deudasCard">
-
-      </div>
-    </div>
-  </div>
-</div>
